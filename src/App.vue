@@ -40,22 +40,37 @@ import { Component, Vue } from "vue-property-decorator";
 import store from "./store";
 import NavigationBar from "./components/navbar/NavigationBar.vue";
 import BreadCrumbs from "./components/breadCrumbs/breadCrumbs-component.vue";
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
 @Component({
   components: {
     NavigationBar,
-    BreadCrumbs
+    BreadCrumbs,
+    FontAwesomeIcon
   }
 })
 export default class extends Vue {
-  private breadCrumbs: Array<any>;
+  private _breadCrumbs: Array<any>;
 
   constructor() {
     super();
-    this.breadCrumbs = this.$store.getters.getCrumbs;
+    this._breadCrumbs =  ['home'];//this.$store.getters.getCrumbs;
   }
   mounted() {
     //store.dispatch('addCrumb',{text:this.$router.currentRoute.name,name:this.$router.currentRoute.name});
     //this.breadCrumbs = this.$store.getters.getCrumbs;
+    //this._breadCrumbs = this.$store.getters.getCrumbs;
+    this.breadCrumbs = this.$store.getters.getCrumbs;
+  }
+
+  set breadCrumbs(crumbs:Array<any>){
+    this._breadCrumbs = crumbs;
+  }
+  get breadCrumbs(): Array<any>{
+   return this._breadCrumbs;
+  }
+  conputerBreadCrumbs(){
+    return this.breadCrumbs;
   }
 }
 </script>

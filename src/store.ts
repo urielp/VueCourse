@@ -7,10 +7,12 @@ const debug = process.env.NODE_ENV !== "production";
 
 export default new Vuex.Store({
   state: {
-    curmbs: Array()
+    curmbs: Array(),
+    toDos:["one","two","three"]
   },
   getters: {
-    getCrumbs: state => state.curmbs
+    getCrumbs: state => state.curmbs,
+    getToDos:state => state.toDos
   },
   mutations: {
     pushCrumb(state, obj) {
@@ -30,6 +32,17 @@ export default new Vuex.Store({
         });
         console.log(state.curmbs);
       }
+    },
+    popToDo(state,toDoToRemove){
+      console.log(`removing todo: ${toDoToRemove}`);
+      const found = state.toDos.some(el => el === toDoToRemove);
+      if (found) {
+
+        state.toDos = state.toDos.filter(el => {
+          return el !== toDoToRemove;
+        });
+        console.log(state.toDos);
+      }
     }
   },
   actions: {
@@ -38,7 +51,10 @@ export default new Vuex.Store({
     },
     removeCrumb({ commit }, textToRemove) {
       commit("popCrumb", textToRemove);
-    }
+    },
+    removeToDo({commit,state},toDoToRemove){
+      commit('popToDo',toDoToRemove.toDoToRemove);
+    },
   }
   //plugins: debug ? [createLogger()] : [],
 });

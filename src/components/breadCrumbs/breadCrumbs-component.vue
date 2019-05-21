@@ -27,6 +27,7 @@ export default class BreadCrumbs extends Vue {
   }
 
   mounted() {
+
     store.dispatch("addCrumb", {
       text: this.$router.currentRoute.name,
       name: this.$router.currentRoute.name,
