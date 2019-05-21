@@ -1,0 +1,18 @@
+---
+  0 info pnpm: 
+    message: "Installing a flat node_modules. Use flat node_modules only if you rely on buggy dependencies that you cannot fix."
+    prefix: "C:\\Users\\parientu.CORPDOM\\WebstormProjects\\untitled1\\FrontEnd"
+  1 debug pnpm:scope: 
+    selected: 1
+    workspacePrefix: null
+  2 debug pnpm: 
+    isCaseSensitive: false
+    store: "C:\\Users\\parientu.CORPDOM\\.pnpm-store\\2"
+  3 error pnpm: 
+    message: 
+      code: "ERR_PNPM_SHAMEFULLY_FLATTEN_NOT_WANTED"
+    err: 
+      name: "Error"
+      message: "This \"node_modules\" folder was created without the --shamefully-flatten option. You must remove that option, or else add the --force option to recreate the \"node_modules\" folder."
+      code: "ERR_PNPM_SHAMEFULLY_FLATTEN_NOT_WANTED"
+      stack: "Error: This \"node_modules\" folder was created without the --shamefully-flatten option. You must remove that option, or else add the --force option to recreate the \"node_modules\" folder.\n    at Promise.all.importers.map (c:\\Program Files\\nodejs\\node_modules\\pnpm\\lib\\node_modules\\supi\\lib\\getContext\\index.js:79:23)\n    at Array.map (<anonymous>)\n    at validateNodeModules (c:\\Program Files\\nodejs\\node_modules\\pnpm\\lib\\node_modules\\supi\\lib\\getContext\\index.js:72:33)\n    at Object.getContext [as default] (c:\\Program Files\\nodejs\\node_modules\\pnpm\\lib\\node_modules\\supi\\lib\\getContext\\index.js:17:15)\n    at process._tickCallback (internal/process/next_tick.js:68:7)"

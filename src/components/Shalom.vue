@@ -19,20 +19,23 @@
         <br />
         <b-container>
           <b-row>
-            <b-col md="4" offset-md="4" class="test">
+            <b-col md="4" offset-md="4">
               <b-list-group>
                 <b-list-group-item
                   variant="primary"
                   v-for="(item, index) in getComputedToDos()"
                   v-bind:key="index"
                   @dblclick="whatAmI(item)"
-                  >{{ item }}</b-list-group-item
-                >
+                >{{ item }}
+
+                </b-list-group-item>
+
               </b-list-group>
             </b-col>
           </b-row>
         </b-container>
         <b-card-text>Header and footers using slots.</b-card-text>
+
         <b-button href="#" variant="primary">Go somewhere</b-button>
         <input type="text" v-model="message" />
         <button @click="addToDoItem(message)">Add To Do</button>
@@ -41,7 +44,25 @@
     </b-card-group>
   </div>
 </template>
+<style>
 
+  .icon::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+  }
+  .test::before {
+    display: inline-block;
+    visibility: visible;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f1ea";
+    margin-left: -1.3em;
+    width: 1.3em;
+  }
+</style>
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
