@@ -1,7 +1,7 @@
 <template>
     <b-list-group-item
             variant="primary"
-            @dblclick="removeToDo(item)">{{ item }}
+            @dblclick="removeToDo(item.id)">{{ item.todo }}
 </b-list-group-item>
 </template>
 
@@ -12,13 +12,16 @@ import store from "../../store";
 @Component({})
 export default class ToDoListItem extends Vue {
 
+      readonly chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('');
+
      @Prop({default:'NA'})
-     item!:string;
+     item!:any;
      @Prop()
      index!:number;
 
         constructor() {
             super();
+            console.log(this.item);
         }
         mounted() {
 
@@ -27,9 +30,28 @@ export default class ToDoListItem extends Vue {
         destroyed() {
 
         }
-    removeToDo(toDoToRemove:string){
-            console.log(toDoToRemove);
-        store.dispatch("removeToDo",{toDoToRemove});
+    removeToDo(id:string){
+
+            console.log(id);
+        this.$store.dispatch("removeToDo",id);
         }
+   addToDo(toDoToAdd:string){
+        console.log(this.randomString(12));
+        this.$store.dispatch("addToDo",{toDoToAdd});
+    }
+     randomString(length:number) {
+
+        if (! length) {
+            length = Math.floor(Math.random() * this.chars.length);
+        }
+
+        let result = [];
+        result.length = length;
+        for (let i = 0; i < length; i++) {
+            result[i] = this.chars[Math.floor(Math.random() * this.chars.length)];
+        }
+        return result.join('');
+    }
+
 }
 </script>

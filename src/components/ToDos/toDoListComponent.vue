@@ -24,12 +24,10 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import store from "../../store";
 import ToDoListItem from './toDoItemComponent.vue';
 
 @Component({components: {ToDoListItem}})
 export default class ToDoList extends Vue {
-  private listItems: Array<string> = [];
   private route: string | undefined;
   toDoList!: Array<string>;
 
@@ -42,7 +40,7 @@ export default class ToDoList extends Vue {
 
   mounted() {
 
-    store.dispatch("addCrumb", {
+    this.$store.dispatch("addCrumb", {
       text: this.$router.currentRoute.name,
       name: this.$router.currentRoute.name,
       href: this.$router.currentRoute.name
@@ -52,10 +50,10 @@ export default class ToDoList extends Vue {
   }
 
   destroyed() {
-    store.dispatch("removeCrumb", this.route);
+    this.$store.dispatch("removeCrumb", this.route);
   }
   getComputedToDosLength() {
-    return store.state.toDos.length;
+    return this.$store.state.toDos.length;
   }
 }
 </script>

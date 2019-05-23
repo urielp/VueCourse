@@ -15,23 +15,24 @@
       </b-card>
       <b-card title="Title" header-tag="header" footer-tag="footer">
         <h6 slot="header" class="mb-0">{{ getComputedMessage() }}</h6>
-        {{ getComputedToDosLength() }}
+        {{ this.$store.getters.getToDos.length }}
         <br />
         <b-container>
           <b-row>
-            <b-col md="4" offset-md="4">
-              <b-list-group>
-                <b-list-group-item
-                  variant="primary"
-                  v-for="(item, index) in getComputedToDos()"
-                  v-bind:key="index"
-                  @dblclick="whatAmI(item)"
-                >{{ item }}
+            <ToDoList/>
+<!--            <b-col md="4" offset-md="4">-->
+<!--              <b-list-group>-->
+<!--                <b-list-group-item-->
+<!--                  variant="primary"-->
+<!--                  v-for="(item, index) in this.$store.getters.getToDos"-->
+<!--                  v-bind:key="index"-->
+<!--                  @dblclick="whatAmI(item)"-->
+<!--                >{{ item }}-->
 
-                </b-list-group-item>
+<!--                </b-list-group-item>-->
 
-              </b-list-group>
-            </b-col>
+<!--              </b-list-group>-->
+<!--            </b-col>-->
           </b-row>
         </b-container>
         <b-card-text>Header and footers using slots.</b-card-text>
@@ -65,11 +66,11 @@
 </style>
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-
-@Component({})
+import ToDoList from  './ToDos/toDoListComponent.vue';
+@Component({components: {ToDoList}})
 export default class Shalom extends Vue {
   @Prop() private myNewMessage!: string;
-
+  readonly chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('');
   message: string;
 
   toDoList = ["one", "two", "three"];
@@ -86,10 +87,24 @@ export default class Shalom extends Vue {
     return this.toDoList.length;
   }
 
-  addToDoItem(value: any) {
-    this.toDoList.push(value);
-  }
+  addToDoItem(toDoToAdd: string) {
+      console.log(this.randomString(12));
+      this.$store.dispatch("addToDo",{id:this.randomString(12),todo:toDoToAdd});
 
+  }
+  randomString(length:number) {
+
+    if (! length) {
+      length = Math.floor(Math.random() * this.chars.length);
+    }
+
+    let result = [];
+    result.length = length;
+    for (let i = 0; i < length; i++) {
+      result[i] = this.chars[Math.floor(Math.random() * this.chars.length)];
+    }
+    return result.join('');
+  }
   getComputedToDos() {
     return this.toDoList;
   }

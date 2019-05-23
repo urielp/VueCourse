@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import createLogger from "vuex/dist/logger";
+//import createLogger from "vuex/dist/logger";
 
 Vue.use(Vuex);
 const debug = process.env.NODE_ENV !== "production";
@@ -8,7 +8,7 @@ const debug = process.env.NODE_ENV !== "production";
 export default new Vuex.Store({
   state: {
     curmbs: Array(),
-    toDos:["one","two","three"]
+    toDos:[{id:"cvcx43gdg",todo:"one"},{id:"g34vbfd4",todo:"two"},{id:"f34gfd",todo:"three"}]
   },
   getters: {
     getCrumbs: state => state.curmbs,
@@ -18,31 +18,31 @@ export default new Vuex.Store({
     pushCrumb(state, obj) {
       const found = state.curmbs.some(el => el.text === obj.text);
       if (!found) {
-        console.log("add crumb");
         state.curmbs.push(obj);
-        console.log(state.curmbs);
       }
     },
     popCrumb(state, textToRemove) {
       const found = state.curmbs.some(el => el.text === textToRemove);
       if (found) {
-        console.log(`removing crumb: ${textToRemove}`);
         state.curmbs = state.curmbs.filter(el => {
           return el.text !== textToRemove;
         });
-        console.log(state.curmbs);
       }
     },
-    popToDo(state,toDoToRemove){
-      console.log(`removing todo: ${toDoToRemove}`);
-      const found = state.toDos.some(el => el === toDoToRemove);
+    popToDo(state,toDoToRemoveID){
+
+      const found = state.toDos.some(el => el.id === toDoToRemoveID);
       if (found) {
 
         state.toDos = state.toDos.filter(el => {
-          return el !== toDoToRemove;
+          return el.id !== toDoToRemoveID;
         });
-        console.log(state.toDos);
+
       }
+    },
+    addToDo(state,toDoToAdd){
+
+      state.toDos.push(toDoToAdd);
     }
   },
   actions: {
@@ -52,8 +52,13 @@ export default new Vuex.Store({
     removeCrumb({ commit }, textToRemove) {
       commit("popCrumb", textToRemove);
     },
-    removeToDo({commit,state},toDoToRemove){
-      commit('popToDo',toDoToRemove.toDoToRemove);
+    removeToDo({commit,state},toDoToRemoveID){
+
+      commit('popToDo',toDoToRemoveID);
+    },
+    addToDo({commit,state},toDoToAdd){
+
+      commit('addToDo',toDoToAdd);
     },
   }
   //plugins: debug ? [createLogger()] : [],
