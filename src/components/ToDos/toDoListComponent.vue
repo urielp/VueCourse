@@ -34,7 +34,6 @@ export default class ToDoList extends Vue {
   constructor() {
     super();
     this.toDoList = this.$store.getters.getToDos;
-    console.log(this.toDoList);
   }
 
 

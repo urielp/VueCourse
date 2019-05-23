@@ -88,9 +88,7 @@ export default class Shalom extends Vue {
   }
 
   addToDoItem(toDoToAdd: string) {
-      console.log(this.randomString(12));
       this.$store.dispatch("addToDo",{id:this.randomString(12),todo:toDoToAdd});
-
   }
   randomString(length:number) {
 

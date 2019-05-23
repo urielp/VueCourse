@@ -21,7 +21,7 @@ export default class ToDoListItem extends Vue {
 
         constructor() {
             super();
-            console.log(this.item);
+
         }
         mounted() {
 
@@ -30,15 +30,12 @@ export default class ToDoListItem extends Vue {
         destroyed() {
 
         }
-    removeToDo(id:string){
-
-            console.log(id);
-        this.$store.dispatch("removeToDo",id);
+        removeToDo(id:string){
+            this.$store.dispatch("removeToDo",id);
+            }
+        addToDo(toDoToAdd:string){
+            this.$store.dispatch("addToDo",{toDoToAdd});
         }
-   addToDo(toDoToAdd:string){
-        console.log(this.randomString(12));
-        this.$store.dispatch("addToDo",{toDoToAdd});
-    }
      randomString(length:number) {
 
         if (! length) {
